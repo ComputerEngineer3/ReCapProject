@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,13 +16,13 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public void Insert(Car entity)
         {
-            if (car.Description.Length >= 2)
+            if (entity.Description.Length >= 2)
             {
-                if (car.DailyPrice > 0)
+                if (entity.DailyPrice > 0)
                 {
-                    _carDal.Add(car);
+                    _carDal.Add(entity);
                 }
                 else
                 {
@@ -40,14 +41,34 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetAll(p => p.BrandId == id);
+            return _carDal.GetAll(p => p.BrandId == brandId);
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public List<Car> GetCarsByColorId(int colorId)
         {
-            return _carDal.GetAll(p => p.ColorId == id);
+            return _carDal.GetAll(p => p.ColorId == colorId);
+        }
+
+        public Car GetById(int id)
+        {
+            return _carDal.Get(p => p.Id == id);
+        }
+
+        public void Update(Car entity)
+        {
+            _carDal.Update(entity);
+        }
+
+        public void Delete(Car entity)
+        {
+            _carDal.Delete(entity);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
     }
 }
