@@ -23,23 +23,23 @@ namespace ConsoleUI
         private static void CrudOperationsTestForCars()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine(car.CarName + " " + car.BrandName + " " + car.ColorName + " " + car.DailyPrice);
             }
             Console.WriteLine("-----");
-            Console.WriteLine(carManager.GetById(1).Description);
+            Console.WriteLine(carManager.GetById(1).Data.Description);
             Car carNew = new Car { BrandId = 11, ColorId = 3, ModelYear = 2019, DailyPrice = 280, Description = "Kia Sorento" };
             carManager.Insert(carNew);
             Console.WriteLine("-----");
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine(car.CarName + " " + car.BrandName + " " + car.ColorName + " " + car.DailyPrice);
             }
             Console.WriteLine("-----");
             carManager.Update(carNew);
             carManager.Delete(carNew);
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine(car.CarName + " " + car.BrandName + " " + car.ColorName + " " + car.DailyPrice);
             }
@@ -49,23 +49,23 @@ namespace ConsoleUI
         private static void CrudOperationsTestForBrands()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.Name);
             }
             Console.WriteLine("-----");
-            Console.WriteLine(brandManager.GetById(1).Name);
+            Console.WriteLine(brandManager.GetById(1).Data.Name);
             Brand newBrand = new Brand() { Name = "Toyota" };
             brandManager.Insert(newBrand);
             Console.WriteLine("-----");
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.Name);
             }
             Console.WriteLine("-----");
             brandManager.Update(newBrand);
             brandManager.Delete(newBrand);
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.Name);
             }
@@ -75,23 +75,23 @@ namespace ConsoleUI
         private static void CrudOperationsTestForColors()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.Name);
             }
             Console.WriteLine("-----");
-            Console.WriteLine(colorManager.GetById(1).Name);
+            Console.WriteLine(colorManager.GetById(1).Data.Name);
             Color newColor = new Color() { Name = "Mavi" };
             colorManager.Insert(newColor);
             Console.WriteLine("-----");
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.Name);
             }
             Console.WriteLine("-----");
             colorManager.Update(newColor);
             colorManager.Delete(newColor);
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.Name);
             }
@@ -102,7 +102,7 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine(car.Description);
             }
@@ -112,7 +112,7 @@ namespace ConsoleUI
             Console.WriteLine("");
             Console.WriteLine(" Fiat Cars");
             Console.WriteLine("--------------");
-            foreach (var car in carManager.GetCarsByBrandId(2))
+            foreach (var car in carManager.GetCarsByBrandId(2).Data)
             {
                 Console.WriteLine(car.Description);
             }
@@ -122,7 +122,7 @@ namespace ConsoleUI
             Console.WriteLine("");
             Console.WriteLine(" White Cars");
             Console.WriteLine("--------------");
-            foreach (var car in carManager.GetCarsByColorId(1))
+            foreach (var car in carManager.GetCarsByColorId(1).Data)
             {
                 Console.WriteLine(car.Description);
             }
@@ -135,9 +135,9 @@ namespace ConsoleUI
 
             carManager.Insert(newCar);
 
-            Console.WriteLine("");
+            Console.WriteLine();
 
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine(car.Description);
             }
