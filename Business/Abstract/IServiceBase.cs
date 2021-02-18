@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,11 +8,11 @@ namespace Business.Abstract
 {
     public interface IServiceBase<TEntity> where TEntity : class, IEntity, new()
     {
-        List<TEntity> GetAll();
-        TEntity GetById(int id);
-        void Insert(TEntity entity);
-        void Update(TEntity entity);
-        void Delete(TEntity entity);
+        IDataResult<List<TEntity>> GetAll();
+        IDataResult<TEntity> GetById(int id);
+        IResult Insert(TEntity entity);
+        IResult Update(TEntity entity);
+        IResult Delete(TEntity entity);
        
     }
 }
