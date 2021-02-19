@@ -24,5 +24,24 @@ namespace Business.Constants
         public static string BrandAdded = "Marka eklendi.";
         public static string BrandNameInvalid = "Marka ismi geçersiz.";
         public static string BrandUpdated = "Marka güncellendi.";
+        
+        public static string UserDeleted = "Kullanıcı silindi";
+        public static string UsersListed = "Kullanıcılar listelendi.";
+        public static string UserAdded = "Kullanıcı eklendi.";
+        public static string UserNameInvalid = "Kullanıcı ismi geçersiz.";
+        public static string UserUpdated = "Kullanıcı güncellendi.";
+
+        public static string CustomerDeleted = "Müşteri silindi";
+        public static string CustomersListed = "Müşteriler listelendi.";
+        public static string CustomerAdded = "Müşteri eklendi.";
+        public static string CustomerNameInvalid = "Müşteri ismi geçersiz.";
+        public static string CustomerUpdated = "Müşteri güncellendi.";
+
+        public static string RentalDeleted = "Kiralama silindi";
+        public static string RentalsListed = "Kiralamalar listelendi.";
+        public static string RentalAdded = "Kiralama eklendi.";
+        public static string RentalNameInvalid = "Kiralama ismi geçersiz.";
+        public static string RentalUpdated = "Kiralama güncellendi.";
+        public static string CarUndelivered = "Kiralanan araba teslim edilmemiş";
     }
 }
