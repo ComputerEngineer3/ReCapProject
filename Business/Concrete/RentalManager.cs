@@ -34,12 +34,16 @@ namespace Business.Concrete
 
         public IResult Insert(Rental entity)
         {
-            if (entity.ReturnDate == null)
+            var getByCarId = _rentalDal.GetAll(p => p.CarId == entity.CarId);
+
+            foreach (var car in getByCarId)
             {
-                return new ErrorResult(Messages.CarUndelivered);
+                if(car.ReturnDate == null)
+                {
+                    return new ErrorResult(Messages.CarUndelivered);
+                }
             }
 
-            
             _rentalDal.Add(entity);
             return new SuccessResult(Messages.RentalAdded);
         }

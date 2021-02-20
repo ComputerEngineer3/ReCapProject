@@ -21,7 +21,40 @@ namespace ConsoleUI
             //UsersCustomersRentDatesListing();
             //RentalAddAndListTest();
 
-            
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            foreach (var rental in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(rental.CarId);
+            }
+            Console.WriteLine();
+
+            Rental newRental2 = new Rental();
+            newRental2.CarId = 3;
+            newRental2.CustomerId = 1;
+            newRental2.RentDate = DateTime.Now;
+            Console.WriteLine(rentalManager.Insert(newRental2).Success);
+
+            Console.WriteLine();
+            foreach (var rental in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(rental.CarId);
+            }
+
+            Rental newRental3 = new Rental();
+            newRental3.CarId = 2;
+            newRental3.CustomerId = 3;
+            newRental3.RentDate = DateTime.Now;
+
+            Console.WriteLine();
+            Console.WriteLine(rentalManager.Insert(newRental3).Success);
+
+            Console.WriteLine();
+            foreach (var rental in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(rental.CarId);
+            }
+
+
 
         }
 
