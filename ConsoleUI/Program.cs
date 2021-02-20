@@ -19,8 +19,13 @@ namespace ConsoleUI
             //CrudOperationsTestForCars();
 
             //UsersCustomersRentDatesListing();
+
             //RentalAddAndListTest();
 
+        }
+
+        private static void RentalAddAndListTest()
+        {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             foreach (var rental in rentalManager.GetAll().Data)
             {
@@ -53,32 +58,8 @@ namespace ConsoleUI
             {
                 Console.WriteLine(rental.CarId);
             }
-
-
-
         }
 
-        private static void RentalAddAndListTest()
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            foreach (var rental in rentalManager.GetAll().Data)
-            {
-                Console.WriteLine(rental.CarId);
-            }
-            Console.WriteLine();
-
-            Rental newRental = new Rental();
-            newRental.CarId = 2;
-            newRental.CustomerId = 1;
-            newRental.ReturnDate = null;
-            Console.WriteLine(rentalManager.Insert(newRental).Success);
-
-            Console.WriteLine();
-            foreach (var rental in rentalManager.GetAll().Data)
-            {
-                Console.WriteLine(rental.CarId);
-            }
-        }
 
         private static void UsersCustomersRentDatesListing()
         {
