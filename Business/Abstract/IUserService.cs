@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    interface IUserService : IServiceBase<User>
+    public interface IUserService : IServiceBase<User>
     {
     }
 }
