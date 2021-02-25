@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,23 +23,34 @@ namespace Business.Concrete
 
         public IResult Insert(Car entity)
         {
-            if (entity.Description.Length >= 2)
-            {
-                if (entity.DailyPrice > 0)
-                {
-                    _carDal.Add(entity);
-                    return new SuccessResult(Messages.CarAdded);
+            //business codes
+            //validation codes
 
-                }
-                else
-                {
-                    return new ErrorResult(Messages.CarDailyPriceInvalid);
-                }
-            }
-            else
-            {
-                return new ErrorResult(Messages.CarDescriptionInvalid);
-            }
+            //if (entity.Description.Length >= 2)
+            //{
+            //    if (entity.DailyPrice > 0)
+            //    {
+            //        _carDal.Add(entity);
+            //        return new SuccessResult(Messages.CarAdded);
+
+            //    }
+            //    else
+            //    {
+            //        return new ErrorResult(Messages.CarDailyPriceInvalid);
+            //    }
+            //}
+            //else
+            //{
+            //    return new ErrorResult(Messages.CarDescriptionInvalid);
+            //}
+
+            
+
+            ValidationTool.Validate(new CarValidator(),entity);
+
+
+            _carDal.Add(entity);
+            return new SuccessResult(Messages.CarAdded);
 
         }
 
