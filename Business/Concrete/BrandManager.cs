@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -36,6 +37,8 @@ namespace Business.Concrete
             return new SuccessDataResult<Brand>(_brandDal.Get(p => p.Id == id));
         }
 
+
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Insert(Brand entity)
         {
             /*if (entity.Name.Length >= 2)
@@ -48,7 +51,7 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.BrandNameInvalid);
             }*/
 
-            ValidationTool.Validate(new BrandValidator(),entity);
+            //ValidationTool.Validate(new BrandValidator(),entity);
 
             _brandDal.Add(entity);
             return new SuccessResult(Messages.BrandAdded);

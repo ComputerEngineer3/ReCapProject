@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -35,9 +36,11 @@ namespace Business.Concrete
             return new SuccessDataResult<Customer>(_customerDal.Get(p => p.UserId == id));
         }
 
+
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Insert(Customer entity)
         {
-            ValidationTool.Validate(new CustomerValidator(), entity);
+            //ValidationTool.Validate(new CustomerValidator(), entity);
 
             _customerDal.Add(entity);
             return new SuccessResult(Messages.CustomerAdded);

@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -34,6 +35,8 @@ namespace Business.Concrete
             return new SuccessDataResult<Rental>(_rentalDal.Get(p => p.Id == id));
         }
 
+
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Insert(Rental entity)
         {
             var getByCarId = _rentalDal.GetAll(p => p.CarId == entity.CarId);
@@ -46,7 +49,7 @@ namespace Business.Concrete
                 }
             }
 
-            ValidationTool.Validate(new RentalValidator(), entity);
+            //ValidationTool.Validate(new RentalValidator(), entity);
 
             _rentalDal.Add(entity);
             return new SuccessResult(Messages.RentalAdded);
