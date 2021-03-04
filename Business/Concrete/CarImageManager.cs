@@ -40,10 +40,16 @@ namespace Business.Concrete
         
         public IDataResult<CarImage> GetById(int id)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.CarId== id));
-        }      
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.Id == id));
+        }
 
-        
+
+        public IDataResult<List<CarImage>> GetByCarId(int carId)
+        {
+            return new SuccessDataResult<List<CarImage>>(CheckIfCarImageNull(carId));
+        }
+
+
         public IResult Insert(IFormFile file, CarImage entity)
         {
             IResult result = BusinessRules.Run(CheckIfPictureLimitExceded(entity.CarId));
@@ -55,6 +61,7 @@ namespace Business.Concrete
 
             entity.ImagePath = FileHelper.Add(file);
             entity.Date = DateTime.Now;
+            entity.ImagePath = entity.ImagePath.Substring(101);
 
             _carImageDal.Add(entity);
             return new SuccessResult(Messages.CarImageAdded);
@@ -65,6 +72,8 @@ namespace Business.Concrete
         {
             entity.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == entity.Id).ImagePath, file);
             entity.Date = DateTime.Now;
+            entity.ImagePath = entity.ImagePath.Substring(101);
+
             _carImageDal.Update(entity);
             return new SuccessResult();
         }

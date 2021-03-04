@@ -9,9 +9,6 @@ namespace Core.Utilities.Helper
 {
     public class FileHelper
     {
-        static string directory = Environment.CurrentDirectory + @"\wwwroot\";
-        static string folderName = "\\Images\\";
-
         public static string Add(IFormFile file)
         {
             var sourcePath = Path.GetTempFileName();
@@ -33,14 +30,16 @@ namespace Core.Utilities.Helper
         {
             try
             {
+                var newdeletedPath = @"\wwwroot\Images" + path;
+                //File.Delete(newdeletedPath);
                 File.Delete(path);
-                return new SuccessResult();
             }
             catch (Exception exception)
             {
                 return new ErrorResult(exception.Message);
             }
-         
+
+            return new SuccessResult();
         }
 
 
@@ -64,12 +63,13 @@ namespace Core.Utilities.Helper
         {
             string fileExtension = (new FileInfo(file.FileName)).Extension;
 
-            string path = Environment.CurrentDirectory + @"\Images";
+            string path = Environment.CurrentDirectory + @"\wwwroot\Images";
             var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
             string result = $@"{path}/{newPath}";
 
             return result;
         }
+
 
     }
 }
