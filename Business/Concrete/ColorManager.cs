@@ -39,7 +39,7 @@ namespace Business.Concrete
 
 
         [ValidationAspect(typeof(ColorValidator))]
-        public IResult Insert(Color entity)
+        public IResult Add(Color entity)
         {
             /*if(entity.Name.Length >= 2)
             {

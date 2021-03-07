@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add(Color color)
         {
-            var result = _colorService.Insert(color);
+            var result = _colorService.Add(color);
             if (result.Success)
             {
                 return Ok(result);

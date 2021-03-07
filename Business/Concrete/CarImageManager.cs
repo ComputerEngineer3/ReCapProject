@@ -50,7 +50,7 @@ namespace Business.Concrete
         }
 
 
-        public IResult Insert(IFormFile file, CarImage entity)
+        public IResult Add(IFormFile file, CarImage entity)
         {
             IResult result = BusinessRules.Run(CheckIfPictureLimitExceded(entity.CarId));
 

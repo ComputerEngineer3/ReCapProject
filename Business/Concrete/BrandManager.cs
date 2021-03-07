@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -38,8 +39,9 @@ namespace Business.Concrete
         }
 
 
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(BrandValidator))]
-        public IResult Insert(Brand entity)
+        public IResult Add(Brand entity)
         {
             /*if (entity.Name.Length >= 2)
             {

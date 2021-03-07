@@ -37,7 +37,7 @@ namespace Business.Concrete
 
 
         [ValidationAspect(typeof(RentalValidator))]
-        public IResult Insert(Rental entity)
+        public IResult Add(Rental entity)
         {
             var getByCarId = _rentalDal.GetAll(p => p.CarId == entity.CarId);
 

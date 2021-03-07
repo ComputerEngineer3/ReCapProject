@@ -23,7 +23,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
-        public IResult Insert(Car entity)
+        public IResult Add(Car entity)
         {
             //business codes
             //validation codes

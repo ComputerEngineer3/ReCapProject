@@ -37,7 +37,7 @@ namespace ConsoleUI
             newRental2.CarId = 3;
             newRental2.CustomerId = 1;
             newRental2.RentDate = DateTime.Now;
-            Console.WriteLine(rentalManager.Insert(newRental2).Success);
+            Console.WriteLine(rentalManager.Add(newRental2).Success);
 
             Console.WriteLine();
             foreach (var rental in rentalManager.GetAll().Data)
@@ -51,7 +51,7 @@ namespace ConsoleUI
             newRental3.RentDate = DateTime.Now;
 
             Console.WriteLine();
-            Console.WriteLine(rentalManager.Insert(newRental3).Success);
+            Console.WriteLine(rentalManager.Add(newRental3).Success);
 
             Console.WriteLine();
             foreach (var rental in rentalManager.GetAll().Data)
@@ -61,7 +61,7 @@ namespace ConsoleUI
         }
 
 
-        private static void UsersCustomersRentDatesListing()
+        /*private static void UsersCustomersRentDatesListing()
         {
             UserManager userManager = new UserManager(new EfUserDal());
             foreach (var user in userManager.GetAll().Data)
@@ -86,7 +86,7 @@ namespace ConsoleUI
             }
 
             Console.WriteLine("----------------------");
-        }
+        }*/
 
         private static void CrudOperationsTestForCars()
         {
@@ -98,7 +98,7 @@ namespace ConsoleUI
             Console.WriteLine("-------");
             Console.WriteLine(carManager.GetById(1).Data.Description);
             Car carNew = new Car { BrandId = 11, ColorId = 3, ModelYear = 2019, DailyPrice = 280, Description = "Kia Sorento" };
-            carManager.Insert(carNew);
+            carManager.Add(carNew);
             Console.WriteLine("-------");
             foreach (var car in carManager.GetCarDetails().Data)
             {
@@ -124,7 +124,7 @@ namespace ConsoleUI
             Console.WriteLine("-------");
             Console.WriteLine(brandManager.GetById(1).Data.Name);
             Brand newBrand = new Brand() { Name = "Toyota" };
-            brandManager.Insert(newBrand);
+            brandManager.Add(newBrand);
             Console.WriteLine("-------");
             foreach (var brand in brandManager.GetAll().Data)
             {
@@ -150,7 +150,7 @@ namespace ConsoleUI
             Console.WriteLine("-------");
             Console.WriteLine(colorManager.GetById(1).Data.Name);
             Color newColor = new Color() { Name = "Mavi" };
-            colorManager.Insert(newColor);
+            colorManager.Add(newColor);
             Console.WriteLine("-------");
             foreach (var color in colorManager.GetAll().Data)
             {
@@ -201,7 +201,7 @@ namespace ConsoleUI
         {
             Car newCar = new Car { BrandId = 9, ColorId = 5, ModelYear = 2019, DailyPrice = 220, Description = "Audi Q3" };
 
-            carManager.Insert(newCar);
+            carManager.Add(newCar);
 
             Console.WriteLine();
 

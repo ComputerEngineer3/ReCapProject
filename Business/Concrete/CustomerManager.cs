@@ -38,7 +38,7 @@ namespace Business.Concrete
 
 
         [ValidationAspect(typeof(CustomerValidator))]
-        public IResult Insert(Customer entity)
+        public IResult Add(Customer entity)
         {
             //ValidationTool.Validate(new CustomerValidator(), entity);
 
