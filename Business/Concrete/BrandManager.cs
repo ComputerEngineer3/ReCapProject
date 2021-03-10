@@ -2,6 +2,9 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -28,19 +31,27 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ColorDeleted);
         }
 
+
+        //key, value
+        [CacheAspect]
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.BrandsListed);
         }
 
+
+
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<Brand> GetById(int id)
         {
             return new SuccessDataResult<Brand>(_brandDal.Get(p => p.Id == id));
         }
 
 
-        [SecuredOperation("product.add,admin")]
+        [SecuredOperation("brand.add,admin")]
         [ValidationAspect(typeof(BrandValidator))]
+        [CacheRemoveAspect("IBrandService.Get")]
         public IResult Add(Brand entity)
         {
             /*if (entity.Name.Length >= 2)
@@ -59,10 +70,22 @@ namespace Business.Concrete
             return new SuccessResult(Messages.BrandAdded);
         }
 
+
+
+        [ValidationAspect(typeof(BrandValidator))]
+        [CacheRemoveAspect("IBrandService.Get")]
         public IResult Update(Brand entity)
         {
             _brandDal.Update(entity);
             return new SuccessResult(Messages.BrandUpdated);
+        }
+
+
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Brand brand)
+        {
+            throw new NotImplementedException();
         }
     }
 }
